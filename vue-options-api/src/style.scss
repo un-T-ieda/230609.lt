@@ -1,0 +1,26 @@
+// base
+body {
+  display: flex;
+  justify-content: center;
+  color: #242424;
+}
+
+tr,
+th,
+td {
+  border: 1px solid #bbb;
+  padding: 0.4em;
+}
+
+th {
+  background-color: #eee;
+}
+
+// utils
+.u-tac {
+  text-align: center;
+}
+
+.u-tar {
+  text-align: right;
+}

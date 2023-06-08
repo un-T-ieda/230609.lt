@@ -1,13 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Vue + TS</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + TS</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <table id="table">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>userId</th>
+        <th>title</th>
+        <th>completed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="todo in todoList" :key="todo.id">
+        <td class="u-tar">
+          {{ todo.id }}
+        </td>
+        <td class="u-tar">
+          {{ todo.userId }}
+        </td>
+        <td>
+          {{ todo.title }}
+        </td>
+        <td class="u-tac">
+          {{ todo.completed ? "○" : "" }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>
