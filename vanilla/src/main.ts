@@ -1,24 +1,59 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import "ress";
+import "./style.scss";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+type TodoList = Todo[];
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+type Todo = {
+  id: number;
+  userId: number;
+  title: string;
+  completed: boolean;
+};
+
+/**
+ * @description
+ * サンプルデータとして TODO リストを取得して JSON を返却する
+ */
+const fetchTodo = async (): Promise<TodoList> => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  return await res.json();
+};
+
+/**
+ * @description
+ * id="table-body" に todo の HTML を追加する
+ */
+const setTableBody = (todo: Todo) => {
+  const tableBody = document.getElementById("table-body");
+
+  if (tableBody) {
+    const template = (todo: Todo) => {
+      const { id, userId, title, completed } = todo;
+
+      return `
+        <tr>
+          <td class="u-tar">${id}</td>
+          <td class="u-tar">${userId}</td>
+          <td>${title}</td>
+          <td class="u-tac">${completed ? "○" : ""}</td>
+        </tr>
+      `;
+    };
+
+    tableBody.insertAdjacentHTML("beforeend", template(todo));
+  }
+};
+
+/**
+ * @description
+ * TODO リストを取得して HTML に反映する
+ */
+const init = () => {
+  fetchTodo().then((todoList) => {
+    todoList.forEach((todo) => {
+      setTableBody(todo);
+    });
+  });
+};
+
+init();
